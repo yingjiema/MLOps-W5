@@ -1,0 +1,37 @@
+version: "3"
+
+services:
+  health:
+    build: ./
+    restart: always
+    ports:
+      - 8001:8000
+
+  bokeh:
+    build: ./face-bokeh
+    restart: always
+    ports:
+      - 8002:8000
+    # depends_on: 
+    #   - health
+  
+  emotion:
+    build: ./face-emotion
+    restart: always
+    ports:
+      - 8003:8000
+    # depends_on: 
+    #   - health
+  
+  triton:
+    image: nvcr.io/nvidia/tritonserver:22.06-py3
+    env_file: ./.aws.env
+    restart: always
+    ports:
+      - 8000:8000
+    command: [
+        "tritonserver",
+        "--model-repository=s3://yingjie-week5/models/"
+      ]
+
+

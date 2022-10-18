@@ -107,7 +107,7 @@ AWS_DEFAULT_REGION=us-east-1
 - Running the triton server alone
 
 ```bash
-docker run --env-file .envs3 -p8000:8000 -p8001:8001 -p8002:8002 --rm --net=host nvcr.io/nvidia/tritonserver:22.06-py3 tritonserver --model-repository=s3://triton-repository/models/
+docker run --env-file .aws.env -p8000:8000 -p8001:8001 -p8002:8002 --rm --net=host nvcr.io/nvidia/tritonserver:22.06-py3 tritonserver --model-repository=s3://triton-repository/models/
 ```
 
 # Docker Compose
